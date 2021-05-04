@@ -1,55 +1,43 @@
 import React, { useState } from "react";
-
-import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalList";
-import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
+import TaskList from "./components/Tasks/TaskList/TaskList";
+import TaskInput from "./components/Tasks/TaskInput/TaskInput";
 import "./App.css";
 
 const App = () => {
-  const [courseGoals, setCourseGoals] = useState([
+  const [tasks, setTasks] = useState([
     { text: "Do all exercises!", id: "g1" },
     { text: "Finish the course!", id: "g2" },
   ]);
 
-  const addGoalHandler = (enteredText) => {
-    setCourseGoals((prevGoals) => {
-      const updatedGoals = [...prevGoals];
-      updatedGoals.unshift({ text: enteredText, id: Math.random().toString() });
-      return updatedGoals;
+  const addTaskHandler = (enteredText) => {
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks];
+      updatedTasks.unshift({ text: enteredText, id: Math.random().toString() });
+      return updatedTasks;
     });
   };
 
-  const deleteItemHandler = (goalId) => {
-    setCourseGoals((prevGoals) => {
-      const updatedGoals = prevGoals.filter((goal) => goal.id !== goalId);
-      return updatedGoals;
+  const deleteItemHandler = (taskId) => {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.filter((task) => task.id !== taskId);
+      return updatedTasks;
     });
   };
 
   let content = (
-    <p style={{ textAlign: "center" }}>No goals found. Maybe add one?</p>
+    <p style={{ textAlign: "center" }}>No tasks found. Maybe add one?</p>
   );
 
-  if (courseGoals.length > 0) {
-    content = (
-      <CourseGoalList items={courseGoals} onDeleteItem={deleteItemHandler} />
-    );
+  if (tasks.length > 0) {
+    content = <TaskList items={tasks} onDeleteItem={deleteItemHandler} />;
   }
 
   return (
     <div>
-      <section id="goal-form">
-        <CourseInput onAddGoal={addGoalHandler} />
+      <section id="task-form">
+        <TaskInput onAddTask={addTaskHandler} />
       </section>
-      <section id="goals">
-        {content}
-        {/* {courseGoals.length > 0 && (
-          <CourseGoalList
-            items={courseGoals}
-            onDeleteItem={deleteItemHandler}
-          />
-        ) // <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>
-        } */}
-      </section>
+      <section id="tasks">{content}</section>
     </div>
   );
 };
