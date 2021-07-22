@@ -1,6 +1,6 @@
 # Task Manager
 
-https://ioannis-sporidis.github.io/react_task_manager/
+https://ioannis-sporidis.github.io/task_manager/
 
 ## Next steps
 
